@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Database\" />
     <Folder Include="View\Pages\" />
   </ItemGroup>
 

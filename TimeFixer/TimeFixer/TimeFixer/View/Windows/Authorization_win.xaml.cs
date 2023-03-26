@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TimeFixer.Classes;
-using TimeFixer.Database;
+//using TimeFixer.Database;
 using Wpf.Ui.Controls;
 
 namespace TimeFixer.View.Windows
@@ -33,7 +33,7 @@ namespace TimeFixer.View.Windows
         private void enter_but_Click(object sender, RoutedEventArgs e)
         {
             if (login_tb.Text == String.Empty || password_tb.Password == String.Empty)
-            {               
+            {
                 MyMessageBox.Show("Ошибка", "Поле логин или пароль пустое!", true);
                 return;
             }
@@ -66,6 +66,8 @@ namespace TimeFixer.View.Windows
                 //        System.Windows.MessageBox.Show("g", "user");
                 //        break;
                 //}
+                Main_win win = new Main_win();
+                win.Show();
                 this.Close();
             }
             catch (Exception ex)

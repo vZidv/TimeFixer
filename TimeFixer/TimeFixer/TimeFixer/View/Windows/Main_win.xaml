@@ -1,0 +1,42 @@
+﻿<Window x:Class="TimeFixer.View.Windows.Main_win"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeFixer.View.Windows"
+        mc:Ignorable="d"
+        xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Main_win" Height="550" Width="900" WindowStyle="None" Background="{StaticResource Chat}" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <ui:TitleBar/>
+        <ui:NavigationCompact HorizontalAlignment="Left"
+            x:Name="rootNavigation"
+            Frame="{Binding ElementName=rootNavigation}">
+            <ui:NavigationCompact.Items>
+                <ui:NavigationSeparator/>
+                <ui:NavigationItem 
+                    Content="Заказы"
+                    Icon="DocumentPageTopLeft20"/>
+                <ui:NavigationItem 
+                    Content="Клиенты"
+                    Icon="Person20"/>
+                <ui:NavigationItem 
+                    Content="Часы"
+                    Icon="Clock20"/>
+            </ui:NavigationCompact.Items>
+            <ui:NavigationCompact.Footer>
+                <ui:NavigationItem
+                    Content="Настройки"
+                    Icon="Settings16"/>
+                <ui:NavigationItem
+                    Content="Выйти"
+                    Icon="ArrowExit20" Click="NavigationItem_Click"/>
+            </ui:NavigationCompact.Footer>
+        </ui:NavigationCompact>
+        <!--<ui:NavigationView>
+            <ui:NavigationView.
+        </ui:NavigationView>-->
+    </Grid>
+
+</Window>

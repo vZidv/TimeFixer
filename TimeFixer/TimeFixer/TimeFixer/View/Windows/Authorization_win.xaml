@@ -36,7 +36,7 @@
                                             Margin="10"/>
                                 <ui:PasswordBox PlaceholderText="Пароль" x:Name="password_tb"
                                                 Margin="10"/>
-                                <ui:Button Content="Авторизоваться" x:Name="enter_but"
+                                <ui:Button Content="Авторизоваться" x:Name="enter_but" IsDefault="True"
                                            HorizontalAlignment="Center" Click="enter_but_Click"/>
                             </StackPanel>
                         </Grid>
