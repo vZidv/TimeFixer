@@ -1,0 +1,50 @@
+﻿<Window x:Class="TimeFixer.View.Windows.Authorization_win"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeFixer.View.Windows"
+        mc:Ignorable="d"
+        xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Authorization_win" Height="550" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid>
+        
+        <Border  Height="550" Width="800" 
+                CornerRadius="25"
+                Background="{StaticResource Blue}">
+            
+            <Grid>
+                <ui:TitleBar />
+                <Border Height="400" Width="300"
+                CornerRadius="25"
+                Background="{StaticResource Chat}">
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.3" Direction="-90" ShadowDepth="7" BlurRadius="5"/>
+                    </Border.Effect>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.6*"/>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="0.5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1">
+                            <StackPanel>
+                                <TextBlock Text="Авторизация" Foreground="White" FontSize="20" FontWeight="Bold" TextAlignment="Center"/>
+                                <ui:TextBox PlaceholderText="Логин" x:Name="login_tb"
+                                            Margin="10"/>
+                                <ui:PasswordBox PlaceholderText="Пароль" x:Name="password_tb"
+                                                Margin="10"/>
+                                <ui:Button Content="Авторизоваться" x:Name="enter_but"
+                                           HorizontalAlignment="Center" Click="enter_but_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Border>
+            </Grid>
+           
+        </Border>
+    </Grid>
+</Window>
