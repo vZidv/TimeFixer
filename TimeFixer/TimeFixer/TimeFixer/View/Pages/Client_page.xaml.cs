@@ -48,5 +48,12 @@ namespace TimeFixer.View.Pages
             LoadDateGrid();            
             allClients_tblock.Text = $"Всего клиентов - {ClientCount()}";
         }
+
+        private void clientAdd_but_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.ClientAdd_win win = new Windows.ClientAdd_win();
+            win.ShowDialog();
+            LoadDateGrid();
+        }
     }
 }

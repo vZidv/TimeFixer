@@ -20,8 +20,9 @@
                        Style="{StaticResource defaultTextBlock}"
                        HorizontalAlignment="Left" VerticalAlignment="Top" 
                        FontSize="20" Margin="5"/>
-            <ui:Button Content="➕ Клиент" VerticalAlignment="Bottom" Margin="10"
-                       Background="{StaticResource Online}"/>
+            <ui:Button Content="➕ Клиент" x:Name="clientAdd_but"
+                       VerticalAlignment="Bottom" Margin="10"
+                       Background="{StaticResource Online}" Click="clientAdd_but_Click"/>
         </Grid>
         <Grid Grid.Row="1">
             <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}"

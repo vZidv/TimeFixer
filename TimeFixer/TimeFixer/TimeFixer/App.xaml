@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Dictionarys/Buttons.xaml"/>
                 <ResourceDictionary Source="Dictionarys/DataGrid.xaml"/>
                 <ResourceDictionary Source="Dictionarys/TextBlocks.xaml"/>
+                <ResourceDictionary Source="Dictionarys/ComboBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

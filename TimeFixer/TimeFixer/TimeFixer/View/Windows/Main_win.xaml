@@ -25,6 +25,12 @@
                         Content="Клиент" Click="client_but_Click"/>
                     <ui:NavigationSeparator/>
                 </ui:NavigationStore.Items>
+                <ui:NavigationStore.Footer>
+                    <ui:NavigationItem
+                        x:Name="exit_but"
+                        Icon="ArrowExit20"
+                        Content="Выйти" Click="exit_but_Click"/>
+                </ui:NavigationStore.Footer>
                
             </ui:NavigationStore>
             

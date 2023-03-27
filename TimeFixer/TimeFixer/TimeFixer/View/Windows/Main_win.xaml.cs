@@ -42,5 +42,12 @@ namespace TimeFixer.View.Windows
         {
             mainFrame.Navigate(new Client_page());
         }
+
+        private void exit_but_Click(object sender, RoutedEventArgs e)
+        {
+            Authorization_win win = new Authorization_win();
+            win.Show();
+            this.Close();
+        }
     }
 }
