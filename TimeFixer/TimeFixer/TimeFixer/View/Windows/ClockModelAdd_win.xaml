@@ -1,0 +1,58 @@
+﻿<Window x:Class="TimeFixer.View.Windows.ClockModelAdd_win"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeFixer.View.Windows"
+        xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Title="ClientAdd_win" Height="400" Width="450" 
+        WindowStyle="None" 
+        Background="Transparent" 
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" >
+    
+    <Grid Background="Transparent">
+
+        <Border 
+            CornerRadius="0,0,25,25"
+            Background="{StaticResource Servers}">
+
+        </Border>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Добавить модель"  VerticalAlignment="Bottom"
+                       Margin="10" FontSize="25"
+                       Style="{StaticResource headerTextBlock}"/>
+            <ui:Button Content="Добавить" x:Name="addClockModel_but"
+                       Background="{StaticResource Online}"
+                       Margin="10" Width="150"
+                       HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="addClockModel_but_Click" />
+            <Grid Grid.Row="1" Margin="0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel >
+                    <ui:TextBox PlaceholderText="Модель"  x:Name="model_tb"
+                                Margin="5"/>
+                    <ui:TextBox PlaceholderText="Производитель"  x:Name="manufacturer_tb"
+                                Margin="5"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <ui:TextBox PlaceholderText="Описание"
+                                TextWrapping="Wrap" AcceptsReturn="True"
+                                x:Name="description_tb"
+                                Margin="5"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        <ui:TitleBar ShowMaximize="False" Background="{StaticResource Chat}"/>
+    </Grid>
+</Window>

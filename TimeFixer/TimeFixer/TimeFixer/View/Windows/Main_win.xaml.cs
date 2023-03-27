@@ -38,10 +38,8 @@ namespace TimeFixer.View.Windows
         }
 
 
-        private void client_but_Click(object sender, RoutedEventArgs e)
-        {
-            mainFrame.Navigate(new Client_page());
-        }
+        private void client_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new Client_page());
+
 
         private void exit_but_Click(object sender, RoutedEventArgs e)
         {
@@ -49,5 +47,8 @@ namespace TimeFixer.View.Windows
             win.Show();
             this.Close();
         }
+
+        private void clock_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new Clock_page());
+
     }
 }

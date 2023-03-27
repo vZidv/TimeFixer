@@ -16,6 +16,9 @@
             <RowDefinition Height ="0.1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+            <ui:AutoSuggestBox PlaceholderText="Поиск"
+                Width="300"
+                x:Name="search_tb"/>
             <TextBlock Text="Клиенты" 
                        Style="{StaticResource defaultTextBlock}"
                        HorizontalAlignment="Left" VerticalAlignment="Top" 

@@ -13,7 +13,7 @@
         
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.08*"/>
+                <ColumnDefinition Width="65"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Frame x:Name="mainFrame" Grid.Column="1"/>
@@ -23,6 +23,14 @@
                         x:Name="client_but"
                         Icon="Person20"
                         Content="Клиент" Click="client_but_Click"/>
+                    <ui:NavigationItem
+                        x:Name="order_but"
+                        Icon="TaskListLtr20"
+                        Content="Заказы" />
+                    <ui:NavigationItem
+                        x:Name="clock_but"
+                        Icon="Clock20"
+                        Content="Часы" Click="clock_but_Click"/>
                     <ui:NavigationSeparator/>
                 </ui:NavigationStore.Items>
                 <ui:NavigationStore.Footer>
