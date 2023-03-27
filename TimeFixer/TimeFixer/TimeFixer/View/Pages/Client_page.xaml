@@ -1,0 +1,54 @@
+﻿<Page x:Class="TimeFixer.View.Pages.Client_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TimeFixer.View.Pages"
+      xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Client_page" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition/>
+            <RowDefinition Height ="0.1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Клиенты" 
+                       Style="{StaticResource defaultTextBlock}"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" 
+                       FontSize="20" Margin="5"/>
+            <ui:Button Content="➕ Клиент" VerticalAlignment="Bottom" Margin="10"
+                       Background="{StaticResource Online}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid RowStyle="{DynamicResource DataGridRowStyle}" CellStyle="{StaticResource DataGridCell}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}" Style="{DynamicResource defaultDataGridStyle}"  x:Name="clients_dg" IsReadOnly="True" RowHeaderWidth="0"
+            Grid.Row="1" Margin="5,0,5,0" BorderThickness="0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
+                    <DataGridTextColumn Header="Ф.И.О" MinWidth="170" Width="*">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                <Binding Path="Name"/>
+                                <Binding Path="LastName"/>
+                                <Binding Path="Patronymic"/>
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Binding="{Binding PhoneNumber}" Header="Номер телефона" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Email}" Header="Email" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding Address}" Header="Адрес" MinWidth="170" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding IdHowDidFindUsNavigation.Name}" Header="Откуда узнали о нас" MinWidth="170" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <TextBlock Text="Всего клиентов"  x:Name="allClients_tblock"
+                       Grid.Row="2" FontSize="12" HorizontalAlignment="Left" Margin="10"
+                   Style="{StaticResource defaultTextBlock}"/>
+    </Grid>
+</Page>

@@ -17,6 +17,8 @@ public partial class TimeFixerContext : DbContext
 
     public virtual DbSet<Client> Clients { get; set; }
 
+    public virtual DbSet<HowDidFindU> HowDidFindUs { get; set; }
+
     public virtual DbSet<ModelClock> ModelClocks { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -31,7 +33,7 @@ public partial class TimeFixerContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-2BSAL1V\\SQL;Database=TimeFixer;Trusted_Connection=True;Encrypt=false");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-2BSAL1V\\SQL;Database=TimeFixer;Trusted_Connection=True; Encrypt = false");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -39,10 +41,21 @@ public partial class TimeFixerContext : DbContext
         {
             entity.ToTable("Client");
 
+            entity.Property(e => e.Address).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Patronymic).HasMaxLength(50);
             entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdHowDidFindUsNavigation).WithMany(p => p.Clients)
+                .HasForeignKey(d => d.IdHowDidFindUs)
+                .HasConstraintName("FK_Client_HowDidFindUs");
+        });
+
+        modelBuilder.Entity<HowDidFindU>(entity =>
+        {
+            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<ModelClock>(entity =>

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TimeFixer.View.Pages;
 
 namespace TimeFixer.View.Windows
 {
@@ -21,7 +22,7 @@ namespace TimeFixer.View.Windows
     {
         public Main_win()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
         private void NavigationView_Navigated(Wpf.Ui.Controls.Interfaces.INavigation sender, Wpf.Ui.Common.RoutedNavigationEventArgs e)
@@ -34,6 +35,12 @@ namespace TimeFixer.View.Windows
             Authorization_win win = new Authorization_win();
             win.Show();
             this.Close();
+        }
+
+
+        private void client_but_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new Client_page());
         }
     }
 }

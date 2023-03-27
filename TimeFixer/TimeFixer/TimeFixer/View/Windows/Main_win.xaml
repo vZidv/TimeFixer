@@ -4,39 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeFixer.View.Windows"
+        xmlns:pages ="clr-namespace:TimeFixer.View.Pages"
         mc:Ignorable="d"
         xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
         Title="Main_win" Height="550" Width="900" WindowStyle="None" Background="{StaticResource Chat}" WindowStartupLocation="CenterScreen">
 
     <Grid>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.08*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Frame x:Name="mainFrame" Grid.Column="1"/>
+            <ui:NavigationStore>
+                <ui:NavigationStore.Items>
+                    <ui:NavigationItem
+                        x:Name="client_but"
+                        Icon="Person20"
+                        Content="Клиент" Click="client_but_Click"/>
+                    <ui:NavigationSeparator/>
+                </ui:NavigationStore.Items>
+               
+            </ui:NavigationStore>
+            
+        </Grid>
         <ui:TitleBar/>
-        <ui:NavigationCompact HorizontalAlignment="Left"
-            x:Name="rootNavigation"
-            Frame="{Binding ElementName=rootNavigation}">
-            <ui:NavigationCompact.Items>
-                <ui:NavigationSeparator/>
-                <ui:NavigationItem 
-                    Content="Заказы"
-                    Icon="DocumentPageTopLeft20"/>
-                <ui:NavigationItem 
-                    Content="Клиенты"
-                    Icon="Person20"/>
-                <ui:NavigationItem 
-                    Content="Часы"
-                    Icon="Clock20"/>
-            </ui:NavigationCompact.Items>
-            <ui:NavigationCompact.Footer>
-                <ui:NavigationItem
-                    Content="Настройки"
-                    Icon="Settings16"/>
-                <ui:NavigationItem
-                    Content="Выйти"
-                    Icon="ArrowExit20" Click="NavigationItem_Click"/>
-            </ui:NavigationCompact.Footer>
-        </ui:NavigationCompact>
-        <!--<ui:NavigationView>
-            <ui:NavigationView.
-        </ui:NavigationView>-->
     </Grid>
 
 </Window>
