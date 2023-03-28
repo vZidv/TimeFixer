@@ -49,6 +49,6 @@ namespace TimeFixer.View.Windows
         }
 
         private void clock_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new Clock_page());
-
+        private void order_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new Order_page());
     }
 }

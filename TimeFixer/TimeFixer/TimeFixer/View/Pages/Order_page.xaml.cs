@@ -13,37 +13,40 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.View.Windows;
 
 namespace TimeFixer.View.Pages
 {
     /// <summary>
-    /// Interaction logic for Clock_page.xaml
+    /// Interaction logic for Order_page.xaml
     /// </summary>
-    public partial class Clock_page : Page
+    public partial class Order_page : Page
     {
-        public Clock_page()
+        public Order_page()
         {
             InitializeComponent();
         }
+
         private void LoadDateGrid()
         {
             using (TimeFixerContext db = new TimeFixerContext())
             {
-                ModelClock[] modelClocks = db.ModelClocks.ToArray();
-                clock_dg.ItemsSource = modelClocks;
+                Order[] orders = db.Orders.Include(o => o.IdClientNavigation).Include(o => o.IdClockNavigation).Include(o => o.IdOrderStatusNavigation).ToArray();
+                orders_dg.ItemsSource = orders;
             }
         }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDateGrid();
-            allClock_tblock.Text = $"Всего - {clock_dg.Items.Count}";
+            allOrders_tblock.Text = $"Всего - {orders_dg.Items.Count}";
         }
 
-        private void clockModelAdd_but_Click(object sender, RoutedEventArgs e)
+        private void orderAdd_but_Click(object sender, RoutedEventArgs e)
         {
-            Windows.ClockModelAdd_win win = new Windows.ClockModelAdd_win();
+            OrderAdd_win win = new OrderAdd_win();
             win.ShowDialog();
-            LoadDateGrid();
         }
+
     }
 }

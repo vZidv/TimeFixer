@@ -34,19 +34,12 @@ namespace TimeFixer.View.Pages
                 clients_dg.ItemsSource = clients;
             }           
         }
-        private int ClientCount()
-        {
-            using (TimeFixerContext db = new TimeFixerContext())
-            {
-                Client[] clients = db.Clients.ToArray();
-                return clients.Length;
-            }
-        }
+
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDateGrid();            
-            allClients_tblock.Text = $"Всего клиентов - {ClientCount()}";
+            allClients_tblock.Text = $"Всего - {clients_dg.Items.Count}"; ;
         }
 
         private void clientAdd_but_Click(object sender, RoutedEventArgs e)

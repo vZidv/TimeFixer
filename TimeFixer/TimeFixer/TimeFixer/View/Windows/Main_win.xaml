@@ -26,7 +26,7 @@
                     <ui:NavigationItem
                         x:Name="order_but"
                         Icon="TaskListLtr20"
-                        Content="Заказы" />
+                        Content="Заказы" Click="order_but_Click" />
                     <ui:NavigationItem
                         x:Name="clock_but"
                         Icon="Clock20"
@@ -34,6 +34,10 @@
                     <ui:NavigationSeparator/>
                 </ui:NavigationStore.Items>
                 <ui:NavigationStore.Footer>
+                    <ui:NavigationItem
+                        x:Name="setting_but"
+                        Icon="Settings20"
+                        Content="Настройки"/>
                     <ui:NavigationItem
                         x:Name="exit_but"
                         Icon="ArrowExit20"

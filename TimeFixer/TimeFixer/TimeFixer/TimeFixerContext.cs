@@ -74,6 +74,7 @@ public partial class TimeFixerContext : DbContext
             entity.Property(e => e.Cost).HasColumnType("money");
             entity.Property(e => e.DateReceiving).HasColumnType("date");
             entity.Property(e => e.DateReturn).HasColumnType("date");
+            entity.Property(e => e.Problem).HasMaxLength(200);
 
             entity.HasOne(d => d.IdClientNavigation).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.IdClient)
@@ -85,8 +86,8 @@ public partial class TimeFixerContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Order_ModelClock");
 
-            entity.HasOne(d => d.OrderStatusNavigation).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.OrderStatus)
+            entity.HasOne(d => d.IdOrderStatusNavigation).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.IdOrderStatus)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Order_OrderStatus");
         });

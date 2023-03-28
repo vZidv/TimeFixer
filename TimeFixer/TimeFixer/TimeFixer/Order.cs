@@ -15,7 +15,9 @@ public partial class Order
 
     public DateTime DateReturn { get; set; }
 
-    public int OrderStatus { get; set; }
+    public int IdOrderStatus { get; set; }
+
+    public string? Problem { get; set; }
 
     public decimal Cost { get; set; }
 
@@ -23,5 +25,5 @@ public partial class Order
 
     public virtual ModelClock IdClockNavigation { get; set; } = null!;
 
-    public virtual OrderStatus OrderStatusNavigation { get; set; } = null!;
+    public virtual OrderStatus IdOrderStatusNavigation { get; set; } = null!;
 }
