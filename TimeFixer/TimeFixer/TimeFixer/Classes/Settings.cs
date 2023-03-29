@@ -12,5 +12,7 @@ namespace TimeFixer.Classes
     {
         public static Frame? frame;
         public static Window? window;
+
+        public static User? user;
     }
 }

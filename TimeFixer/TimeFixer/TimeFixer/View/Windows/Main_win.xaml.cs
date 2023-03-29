@@ -50,5 +50,17 @@ namespace TimeFixer.View.Windows
 
         private void clock_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new Clock_page());
         private void order_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new Order_page());
+
+        private void users_but_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(new User_page());
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Classes.Settings.user.IdSettingNavigation.IdStatusNavigation.StatusName == "admin")
+                users_but.Visibility = Visibility.Visible;
+            else
+                users_but.Visibility = Visibility.Hidden;
+
+        }
     }
 }

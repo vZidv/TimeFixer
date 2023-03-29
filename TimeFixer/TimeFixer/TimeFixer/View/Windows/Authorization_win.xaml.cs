@@ -42,37 +42,29 @@ namespace TimeFixer.View.Windows
                 User user;
 
                 using (TimeFixerContext db = new TimeFixerContext())
-                    user = db.Users.Where(u => u.Login == login_tb.Text).Include(o => o.IdSettingNavigation).FirstOrDefault();
+                    user = db.Users.Where(u => u.Login == login_tb.Text).Include(o => o.IdSettingNavigation.IdStatusNavigation).FirstOrDefault();
 
                 if (user == null || password_tb.Password != user.Password)
                 {
                     Wpf.Ui.Controls.MessageBox ms = new Wpf.Ui.Controls.MessageBox();
-                    ms.Show("Ошибка", "Поле логин или пароль пустое!");
+                    MyMessageBox.Show("Ошибка", "Поле логин или пароль пустое!", true);
 
                     return;
                 }
                 if (password_tb.Password != user.Password)
                 {
                     Wpf.Ui.Controls.MessageBox ms = new Wpf.Ui.Controls.MessageBox();
-                    ms.Show("Ошибка", "Поле логин или пароль пустое!");
+                    MyMessageBox.Show("Ошибка", "Поле логин или пароль пустое!", true);
                 }
 
-                //switch (user.IdSettingNavigation.IdStatusNavigation.StatusName)
-                //{
-                //    case "admin":
-                //        System.Windows.MessageBox.Show("g", "admin");
-                //        break;
-                //    case "user":
-                //        System.Windows.MessageBox.Show("g", "user");
-                //        break;
-                //}
+                Classes.Settings.user = user;
                 Main_win win = new Main_win();
                 win.Show();
                 this.Close();
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show("Ошибка", ex.Message);
+                MyMessageBox.Show("Ошибка", ex.Message);
             }
         }
     }
