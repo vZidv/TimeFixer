@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TimeFixer.View.Windows"
         mc:Ignorable="d"
         xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="HrHelper" Height="250" Width="400" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True">
+        Title="TimeFixer" Height="250" Width="400" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Icon="/Source/Logo.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

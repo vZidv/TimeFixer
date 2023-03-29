@@ -7,10 +7,10 @@
         xmlns:pages ="clr-namespace:TimeFixer.View.Pages"
         mc:Ignorable="d"
         xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="Main_win" Height="550" Width="900" WindowStyle="None" Background="{StaticResource Chat}" WindowStartupLocation="CenterScreen">
+        Title="TimeFixer" Height="550" Width="900" WindowStyle="None" Background="{StaticResource Chat}" WindowStartupLocation="CenterScreen" Icon="/Source/Logo.png">
 
     <Grid>
-        
+        <ui:TitleBar />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65"/>
@@ -47,7 +47,7 @@
             </ui:NavigationStore>
             
         </Grid>
-        <ui:TitleBar/>
+
     </Grid>
 
 </Window>

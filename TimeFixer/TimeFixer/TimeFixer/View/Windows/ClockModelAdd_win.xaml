@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:TimeFixer.View.Windows"
         xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="ClientAdd_win" Height="400" Width="450" 
+        Title="TimeFixer" Height="400" Width="450" 
         WindowStyle="None" 
         Background="Transparent" 
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen" >
+        WindowStartupLocation="CenterScreen" Icon="/Source/Logo.png" >
     
     <Grid Background="Transparent">
 

@@ -46,6 +46,7 @@ namespace TimeFixer.View.Pages
         {
             OrderAdd_win win = new OrderAdd_win();
             win.ShowDialog();
+            LoadDateGrid();
         }
 
     }
