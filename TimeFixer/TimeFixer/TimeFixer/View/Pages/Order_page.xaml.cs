@@ -49,5 +49,18 @@ namespace TimeFixer.View.Pages
             LoadDateGrid();
         }
 
+        private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                Order[] clients = db.Orders.Where(o =>
+                EF.Functions.Like(o.Problem, $"%{search_tb.Text}%") ||
+                EF.Functions.Like(o.IdClientNavigation.LastName, $"%{search_tb.Text}%") ||
+                EF.Functions.Like(o.IdClockNavigation.Model, $"%{search_tb.Text}%")).Include(o => o.IdClientNavigation).Include(o => o.IdClockNavigation).Include(o => o.IdOrderStatusNavigation).ToArray();
+                orders_dg.ItemsSource = clients;
+
+                allOrders_tblock.Text = $"Всего - {orders_dg.Items.Count}";
+            }
+        }
     }
 }

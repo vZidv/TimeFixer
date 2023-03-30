@@ -45,5 +45,19 @@ namespace TimeFixer.View.Pages
             win.ShowDialog();
             LoadDateGrid();
         }
+
+        private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                ModelClock[] clients = db.ModelClocks.Where(o =>
+                EF.Functions.Like(o.Model, $"%{search_tb.Text}%") ||
+                EF.Functions.Like(o.Manufacturer, $"%{search_tb.Text}%") ||
+                EF.Functions.Like(o.Description, $"%{search_tb.Text}%")).ToArray();
+                clock_dg.ItemsSource = clients;
+
+                allClock_tblock.Text = $"Всего - {clock_dg.Items.Count}"; ;
+            }
+        }
     }
 }

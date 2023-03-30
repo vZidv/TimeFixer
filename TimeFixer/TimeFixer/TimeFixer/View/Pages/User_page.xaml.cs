@@ -47,5 +47,15 @@ namespace TimeFixer.View.Pages
             win.ShowDialog();
             LoadDateGrid();
         }
+
+        private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                User[] clients = db.Users.Where(o =>
+                EF.Functions.Like(o.Login, $"%{search_tb.Text}%")).ToArray();
+                users_dg.ItemsSource = clients;
+            }
+        }
     }
 }
