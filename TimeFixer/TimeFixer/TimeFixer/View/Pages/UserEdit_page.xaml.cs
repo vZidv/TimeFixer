@@ -31,14 +31,13 @@ namespace TimeFixer.View.Pages
         {
             login_tb.Text = user.Login;
             password_tb.Text = user.Password;
-            //LoadCombobox();
-            //status_cb.Text = user.IdSettingNavigation.IdStatusNavigation.StatusName;
+            status_cb.Text = user.IdSettingNavigation.IdStatusNavigation.StatusName;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            LoadCombobox();
             LoadUserData();
-            //LoadCombobox();
         }
 
         private void editClient_but_Click(object sender, RoutedEventArgs e)
@@ -46,32 +45,30 @@ namespace TimeFixer.View.Pages
             user.Login = login_tb.Text;
             user.Password = password_tb.Text;
 
-
-
             using (TimeFixerContext db = new TimeFixerContext())
             {
-                //if (status_cb.SelectedIndex == -1)
-                //{
-                //    MyMessageBox.Show("Ошибка", "Тип пользователя не выбран!", true);
-                //    return;
-                //}
-                //else
-                //    db.UserSettings.Where(o=>o.Id == user.IdSetting).First().IdStatus = db.UserStatuses.Where(o => o.StatusName == status_cb.Text).First().Id;
-
-                db.Users.Update(user);
-                db.SaveChanges();
+                if (status_cb.SelectedIndex == -1)
+                {
+                    MyMessageBox.Show("Ошибка", "Пожалуйста, выберите тип пользователя перед обновлением данных.");
+                }
+                else
+                {
+                    db.UserSettings.Where(o => o.Id == user.IdSetting).First().IdStatus = db.UserStatuses.Where(o => o.StatusName == status_cb.Text).First().Id;
+                    db.Users.Update(user);
+                    db.SaveChanges();
+                    MyMessageBox.Show("Внимание", "Данные успешно обновлены!");
+                    Classes.Settings.window.Close();
+                }
             }
-            MyMessageBox.Show("Внимание", "Данные успешно обновлены!");
-            Classes.Settings.window.Close();
 
         }
-        //private void LoadCombobox()
-        //{
-        //    using (TimeFixerContext db = new TimeFixerContext())
-        //    {
-        //        status_cb.ItemsSource = db.UserStatuses.ToList();
-        //        status_cb.DisplayMemberPath = "StatusName";
-        //    }
-        //}
+        private void LoadCombobox()
+        {
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                status_cb.ItemsSource = db.UserStatuses.ToList();
+                status_cb.DisplayMemberPath = "StatusName";
+            }
+        }
     }
 }

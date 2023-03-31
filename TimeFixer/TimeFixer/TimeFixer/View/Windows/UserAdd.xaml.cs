@@ -27,24 +27,30 @@ namespace TimeFixer.View.Windows
 
         private void addUser_but_Click(object sender, RoutedEventArgs e)
         {
-            UserSetting setting = new UserSetting();
-            using (TimeFixerContext db = new TimeFixerContext())
+            if (string.IsNullOrEmpty(login_tb.Text) || string.IsNullOrEmpty(password_tb.Text) || string.IsNullOrEmpty(status_cb.Text))
             {
-                setting.IdStatus = db.UserStatuses.Where(o => o.StatusName == status_cb.Text).FirstOrDefault().Id;
-                db.UserSettings.Add(setting);
-                db.SaveChanges();
-                User user = new User()
-                {
-                    Login = login_tb.Text,
-                    Password = password_tb.Text,
-                    IdSetting = setting.Id
-                };
-                db.Users.Add(user);
-                db.SaveChanges();
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните все поля перед добавлением пользователя.");
             }
-            MyMessageBox.Show("Внимание", "Пользователь добавлен!", MyMessageBoxOptions.Ok);
-            this.Close();
-
+            else
+            {
+                UserSetting setting = new UserSetting();
+                using (TimeFixerContext db = new TimeFixerContext())
+                {
+                    setting.IdStatus = db.UserStatuses.Where(o => o.StatusName == status_cb.Text).FirstOrDefault().Id;
+                    db.UserSettings.Add(setting);
+                    db.SaveChanges();
+                    User user = new User()
+                    {
+                        Login = login_tb.Text,
+                        Password = password_tb.Text,
+                        IdSetting = setting.Id
+                    };
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                }
+                MyMessageBox.Show("Внимание", "Пользователь добавлен!", MyMessageBoxOptions.Ok);
+                this.Close();
+            }
         }
         private void LoadCombobox()
         {

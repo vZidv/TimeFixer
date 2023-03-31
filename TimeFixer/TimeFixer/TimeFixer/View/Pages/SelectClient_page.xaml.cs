@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.Classes;
 
 namespace TimeFixer.View.Pages
 {
@@ -21,11 +22,11 @@ namespace TimeFixer.View.Pages
     /// </summary>
     public partial class SelectClient_page : Page
     {
-        private OrderAdd_page orderAdd_Page;
-        public SelectClient_page(OrderAdd_page orderAdd_Page)
+        private IOreder order;
+        public SelectClient_page(IOreder order)
         {
             InitializeComponent();
-            this.orderAdd_Page = orderAdd_Page;
+            this.order = order;
         }
 
 
@@ -82,7 +83,7 @@ namespace TimeFixer.View.Pages
         private void client_dg_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             int id = ChoosePersonId();
-            orderAdd_Page.client = ClientReturn(id);
+            order.client = ClientReturn(id);
             Classes.Settings.frame.GoBack();
         }
 

@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.Classes;
+using TimeFixer.View.Windows;
 
 namespace TimeFixer.View.Pages
 {
@@ -32,11 +34,11 @@ namespace TimeFixer.View.Pages
                 ModelClock[] modelClocks = db.ModelClocks.ToArray();
                 clock_dg.ItemsSource = modelClocks;
             }
+            allClock_tblock.Text = $"Всего - {clock_dg.Items.Count}";
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadDateGrid();
-            allClock_tblock.Text = $"Всего - {clock_dg.Items.Count}";
+            LoadDateGrid();            
         }
 
         private void clockModelAdd_but_Click(object sender, RoutedEventArgs e)
@@ -58,6 +60,30 @@ namespace TimeFixer.View.Pages
 
                 allClock_tblock.Text = $"Всего - {clock_dg.Items.Count}"; ;
             }
+        }
+
+        private void edit_button_Click(object sender, RoutedEventArgs e)
+        {
+            ModelClock clock = clock_dg.SelectedItem as ModelClock;
+            MinWin win = new MinWin(new ClockModelEdit_page(clock));
+            win.ShowDialog();
+            LoadDateGrid();
+        }
+
+        private void delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            ModelClock clock = clock_dg.SelectedItem as ModelClock;
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить эту модель?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                db.ModelClocks.Remove(clock);
+                db.SaveChanges();
+            }
+            MyMessageBox.Show("Внимание", "Модель успешно удалена!");
+
+            LoadDateGrid();
         }
     }
 }

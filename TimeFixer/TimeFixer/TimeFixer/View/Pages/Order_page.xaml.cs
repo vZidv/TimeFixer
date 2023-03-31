@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.Classes;
 using TimeFixer.View.Windows;
 
 namespace TimeFixer.View.Pages
@@ -34,6 +35,7 @@ namespace TimeFixer.View.Pages
                 Order[] orders = db.Orders.Include(o => o.IdClientNavigation).Include(o => o.IdClockNavigation).Include(o => o.IdOrderStatusNavigation).ToArray();
                 orders_dg.ItemsSource = orders;
             }
+            allOrders_tblock.Text = $"Всего - {orders_dg.Items.Count}";
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -61,6 +63,31 @@ namespace TimeFixer.View.Pages
 
                 allOrders_tblock.Text = $"Всего - {orders_dg.Items.Count}";
             }
+        }
+
+        private void edit_button_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = orders_dg.SelectedItem as Order;
+
+            MinWin win = new MinWin(new OrderEdit_Page(order));
+            win.ShowDialog();
+            LoadDateGrid();
+        }
+
+        private void delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = orders_dg.SelectedItem as Order;
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этот заказ?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                db.Orders.Remove(order);
+                db.SaveChanges();
+            }
+            MyMessageBox.Show("Внимание", "Заказ успешно удален!");
+
+            LoadDateGrid();
         }
     }
 }

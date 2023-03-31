@@ -27,30 +27,38 @@ namespace TimeFixer.View.Windows
 
         private void addClient_but_Click(object sender, RoutedEventArgs e)
         {
-            Client client = new Client()
+            if (string.IsNullOrEmpty(name_tb.Text) || string.IsNullOrEmpty(lastName_tb.Text) || string.IsNullOrEmpty(patronymic_tb.Text) || string.IsNullOrEmpty(phone_tb.Text) || string.IsNullOrEmpty(email_tb.Text) || string.IsNullOrEmpty(address_tb.Text))
             {
-                Name = name_tb.Text,
-                LastName = lastName_tb.Text,
-                Patronymic = patronymic_tb.Text,
-
-                PhoneNumber = patronymic_tb.Text,
-                Email = email_tb.Text,
-
-                Address = address_tb.Text
-            };
-            if (howDidfindUs_cb.SelectedIndex != -1)
-            {
-                var f = howDidfindUs_cb.SelectedItem as HowDidFindU;
-                client.IdHowDidFindUs = f.Id;
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните все поля перед добавлением пользователя.");
             }
-
-            using (TimeFixerContext db = new TimeFixerContext())
+            else
             {
-                db.Clients.Add(client);
-                db.SaveChanges();
+                Client client = new Client()
+                {
+                    Name = name_tb.Text,
+                    LastName = lastName_tb.Text,
+                    Patronymic = patronymic_tb.Text,
+
+                    PhoneNumber = phone_tb.Text,
+                    Email = email_tb.Text,
+
+                    Address = address_tb.Text
+                };
+
+                if (howDidfindUs_cb.SelectedItem is HowDidFindU f)
+                {
+                    client.IdHowDidFindUs = f.Id;
+                }
+
+                using (TimeFixerContext db = new TimeFixerContext())
+                {
+                    db.Clients.Add(client);
+                    db.SaveChanges();
+                }
+
+                MyMessageBox.Show("Внимание", "Пользователь добавлен!", MyMessageBoxOptions.Ok);
+                this.Close();
             }
-            MyMessageBox.Show("Внимание","Пользователь добавлен!",MyMessageBoxOptions.Ok);
-            this.Close();
         }
 
         private void LoadCombobox()

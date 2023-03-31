@@ -60,28 +60,33 @@ namespace TimeFixer.View.Pages
 
         private void editClient_but_Click(object sender, RoutedEventArgs e)
         {
-            using (TimeFixerContext db = new TimeFixerContext())
+            if (string.IsNullOrEmpty(name_tb.Text) || string.IsNullOrEmpty(lastName_tb.Text) || string.IsNullOrEmpty(address_tb.Text) || string.IsNullOrEmpty(phone_tb.Text) || string.IsNullOrEmpty(email_tb.Text) || howDidfindUs_cb.SelectedIndex == -1)
             {
-
-
-                client.Name = name_tb.Text;
-                client.LastName = lastName_tb.Text;
-                client.Patronymic = patronymic_tb.Text;
-
-                client.Address = address_tb.Text;
-                client.PhoneNumber = phone_tb.Text;
-                client.Email = email_tb.Text;
-
-                if(howDidfindUs_cb.SelectedIndex != -1)
-                {
-                    HowDidFindU howDidFindUs = db.HowDidFindUs.Where(o => o.Name == howDidfindUs_cb.Text).First();
-                }
-                   
-                db.Clients.Update(client);
-                db.SaveChanges();
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните все обязательные поля перед обновлением данных клиента.");
             }
-            MyMessageBox.Show("Внимание", "Данные успешно обновлены!");
-            Classes.Settings.window.Close();
+            else
+            {
+                using (TimeFixerContext db = new TimeFixerContext())
+                {
+                    client.Name = name_tb.Text;
+                    client.LastName = lastName_tb.Text;
+                    client.Patronymic = patronymic_tb.Text;
+
+                    client.Address = address_tb.Text;
+                    client.PhoneNumber = phone_tb.Text;
+                    client.Email = email_tb.Text;
+
+                    if (howDidfindUs_cb.SelectedIndex != -1)
+                    {
+                        HowDidFindU howDidFindUs = db.HowDidFindUs.Where(o => o.Name == howDidfindUs_cb.Text).First();
+                    }
+
+                    db.Clients.Update(client);
+                    db.SaveChanges();
+                }
+                MyMessageBox.Show("Внимание", "Данные успешно обновлены!");
+                Classes.Settings.window.Close();
+            }
         }
     }
 }

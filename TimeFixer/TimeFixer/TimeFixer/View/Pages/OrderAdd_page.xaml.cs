@@ -19,10 +19,10 @@ namespace TimeFixer.View.Pages
     /// <summary>
     /// Interaction logic for OrderAdd_page.xaml
     /// </summary>
-    public partial class OrderAdd_page : Page
+    public partial class OrderAdd_page : Page, Classes.IOreder
     {
-        public Client? client;     
-        public ModelClock? clock;
+        public Client? client { get; set; }   
+        public ModelClock? clock { get; set; }
 
         public OrderAdd_page()
         {
@@ -74,28 +74,35 @@ namespace TimeFixer.View.Pages
 
         private void addOrder_but_Click(object sender, RoutedEventArgs e)
         {
-            Order order = new Order()
+            if (client == null || clock == null || dateReceiving_dp.SelectedDate == null || dateReturn_dp.SelectedDate == null || string.IsNullOrEmpty(problem_tb.Text))
             {
-                IdClient = client.Id,
-                IdClock = clock.Id,
-                DateReceiving = dateReceiving_dp.SelectedDate.Value,
-                DateReturn = dateReturn_dp.SelectedDate.Value,
-                Problem = problem_tb.Text
-            };
-
-            if (status_cb.SelectedIndex != -1)
-            {
-                var f = status_cb.SelectedItem as OrderStatus;
-                order.IdOrderStatus = f.Id;
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните все поля перед добавлением заказа.");
             }
-
-            using (TimeFixerContext db = new TimeFixerContext())
+            else
             {
-                db.Orders.Add(order);
-                db.SaveChanges();
+                Order order = new Order()
+                {
+                    IdClient = client.Id,
+                    IdClock = clock.Id,
+                    DateReceiving = dateReceiving_dp.SelectedDate.Value,
+                    DateReturn = dateReturn_dp.SelectedDate.Value,
+                    Problem = problem_tb.Text
+                };
+
+                if (status_cb.SelectedItem is OrderStatus f)
+                {
+                    order.IdOrderStatus = f.Id;
+                }
+
+                using (TimeFixerContext db = new TimeFixerContext())
+                {
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+                }
+
+                MyMessageBox.Show("Внимание", "Заказ добавлен!");
+                Settings.window.Close();
             }
-            MyMessageBox.Show("Внимание", "Заказ добавлен!");
-            Settings.window.Close();
         }
     }
 }

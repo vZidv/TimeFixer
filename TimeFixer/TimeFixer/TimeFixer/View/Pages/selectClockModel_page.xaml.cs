@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.Classes;
 
 namespace TimeFixer.View.Pages
 {
@@ -21,11 +22,11 @@ namespace TimeFixer.View.Pages
     /// </summary>
     public partial class selectClockModel_page : Page
     {
-        private OrderAdd_page orderAdd_Page;
-        public selectClockModel_page(OrderAdd_page orderAdd_Page)
+        private IOreder order;
+        public selectClockModel_page(IOreder order)
         {
             InitializeComponent();
-            this.orderAdd_Page = orderAdd_Page;
+            this.order = order;
         }
         private void LoadDateGrid()
         {
@@ -58,7 +59,7 @@ namespace TimeFixer.View.Pages
         private void clockModel_dg_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             int id = ChoosePersonId();
-            orderAdd_Page.clock = ModelClockReturn(id);
+            order.clock = ModelClockReturn(id);
             Classes.Settings.frame.GoBack();
         }
         private ModelClock ModelClockReturn(int id)

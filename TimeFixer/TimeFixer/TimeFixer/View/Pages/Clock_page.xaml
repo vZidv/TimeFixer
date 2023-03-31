@@ -36,6 +36,20 @@
                     <DataGridTextColumn Binding="{Binding Model}" Header="Модель" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Manufacturer}" Header="Производитель" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Description}" Header="Описание" MinWidth="170" Width="*"/>
+                    <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:Button Icon="Edit16" Background="{StaticResource Blue}"
+                                        x:Name="edit_button" Click="edit_button_Click" />
+                                        <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
+                                        x:Name="delete_button" Click="delete_button_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

@@ -27,20 +27,28 @@ namespace TimeFixer.View.Windows
 
         private void addClockModel_but_Click(object sender, RoutedEventArgs e)
         {
-            ModelClock modelClock = new ModelClock()
+            if (string.IsNullOrEmpty(model_tb.Text) || string.IsNullOrEmpty(manufacturer_tb.Text) || string.IsNullOrEmpty(description_tb.Text))
             {
-                Model = model_tb.Text,
-                Manufacturer = manufacturer_tb.Text,
-                Description = description_tb.Text,
-            };
-
-            using (TimeFixerContext db = new TimeFixerContext())
-            {
-                db.ModelClocks.Add(modelClock);
-                db.SaveChanges();
+                MyMessageBox.Show("Ошибка", "Пожалуйста, заполните все поля перед добавлением модели.");
             }
-            MyMessageBox.Show("Внимание", "Модель добавлена!", MyMessageBoxOptions.Ok);
-            this.Close();
+            else
+            {
+                ModelClock modelClock = new ModelClock()
+                {
+                    Model = model_tb.Text,
+                    Manufacturer = manufacturer_tb.Text,
+                    Description = description_tb.Text,
+                };
+
+                using (TimeFixerContext db = new TimeFixerContext())
+                {
+                    db.ModelClocks.Add(modelClock);
+                    db.SaveChanges();
+                }
+
+                MyMessageBox.Show("Внимание", "Модель добавлена!", MyMessageBoxOptions.Ok);
+                this.Close();
+            }
         }
     }
 }
