@@ -1,0 +1,61 @@
+﻿<Page x:Class="TimeFixer.View.Pages.ClientEdit_page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TimeFixer.View.Pages"
+      xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:Height="400" Width="450"
+      Title="ClientEdit_page" Loaded="Page_Loaded">
+
+    <Grid Background="Transparent">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Изменить клиента"  VerticalAlignment="Bottom"
+                       Margin="10" FontSize="25"
+                       Style="{StaticResource headerTextBlock}"/>
+            <ui:Button Content="Изменить" x:Name="editClient_but"
+                       Background="{StaticResource Online}"
+                       Margin="10" Width="150"
+                       HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="editClient_but_Click" />
+            <Grid Grid.Row="1" Margin="0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel >
+                    <ui:TextBox PlaceholderText="Имя"  x:Name="name_tb"
+                                Margin="5"/>
+                    <ui:TextBox PlaceholderText="Фамилия"  x:Name="lastName_tb"
+                                Margin="5"/>
+                    <ui:TextBox PlaceholderText="Отчество" x:Name="patronymic_tb"
+                                Margin="5"/>
+                    <ui:TextBox PlaceholderText="Адрес" x:Name="address_tb"
+                                Margin="5"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <ui:TextBox PlaceholderText="Номер телефона" x:Name="phone_tb"
+                                Margin="5"/>
+                    <ui:TextBox PlaceholderText="Email" x:Name="email_tb"
+                                Margin="5"/>
+                    <TextBlock Text="Откуда узнал о нас" 
+                               Style="{StaticResource defaultTextBlock}" 
+                               HorizontalAlignment="Left" 
+                               Margin="5" FontSize="15"
+                               FontWeight="DemiBold"/>
+                    <ComboBox  x:Name="howDidfindUs_cb" SelectedValue="HowDidFindU.Id" 
+                        Margin="5"/>
+
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        
+    </Grid>
+</Page>

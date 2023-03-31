@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.Classes;
+using TimeFixer.View.Windows;
 
 namespace TimeFixer.View.Pages
 {
@@ -26,7 +28,7 @@ namespace TimeFixer.View.Pages
             InitializeComponent();
         }
 
-        private void LoadDateGrid()
+        private void LoadDataGrid()
         {
             using(TimeFixerContext db = new TimeFixerContext())
             {
@@ -38,7 +40,7 @@ namespace TimeFixer.View.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadDateGrid();            
+            LoadDataGrid();            
             allClients_tblock.Text = $"Всего - {clients_dg.Items.Count}"; 
         }
 
@@ -46,7 +48,7 @@ namespace TimeFixer.View.Pages
         {
             Windows.ClientAdd_win win = new Windows.ClientAdd_win();
             win.ShowDialog();
-            LoadDateGrid();
+            LoadDataGrid();
         }
 
         private void search_tb_SelectionChanged(object sender, RoutedEventArgs e)
@@ -62,6 +64,37 @@ namespace TimeFixer.View.Pages
 
                 allClients_tblock.Text = $"Всего - {clients_dg.Items.Count}"; ;
             }
+        }
+
+        private void delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            Client client = clients_dg.SelectedItem as Client;
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этого клиента?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                db.Clients.Remove(client);
+                db.SaveChanges();
+            }
+            MyMessageBox.Show("Внимание", "Клиент успешно удален!");
+
+            LoadDataGrid();
+
+        }
+
+        private void edit_button_Click(object sender, RoutedEventArgs e)
+        {
+            Client client = clients_dg.SelectedItem as Client;
+
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                client = db.Clients.Where(o => o.Id == client.Id).Include(o => o.IdHowDidFindUsNavigation).First();
+            }
+
+                MinWin win = new MinWin(new ClientEdit_page(client));
+            win.ShowDialog();
+            LoadDataGrid();
         }
     }
 }

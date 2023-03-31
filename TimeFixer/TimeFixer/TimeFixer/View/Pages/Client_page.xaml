@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TimeFixer.View.Pages"
       xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1200"
       Title="Client_page" Loaded="Page_Loaded">
 
     <Grid>
@@ -48,6 +48,20 @@
                     <DataGridTextColumn Binding="{Binding Email}" Header="Email" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding Address}" Header="Адрес" MinWidth="170" Width="*"/>
                     <DataGridTextColumn Binding="{Binding IdHowDidFindUsNavigation.Name}" Header="Откуда узнали о нас" MinWidth="170" Width="*"/>
+                    <DataGridTemplateColumn Header="Действие" MinWidth="170" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:Button Icon="Edit16" Background="{StaticResource Blue}"
+                                        x:Name="edit_button" Click="edit_button_Click" />
+                                        <ui:Button Icon="Delete12" Background="{StaticResource Dnd}"
+                                        x:Name="delete_button" Click="delete_button_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

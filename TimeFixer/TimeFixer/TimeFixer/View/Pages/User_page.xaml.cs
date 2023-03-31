@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeFixer.Classes;
 using TimeFixer.View.Windows;
 
 namespace TimeFixer.View.Pages
@@ -33,6 +34,7 @@ namespace TimeFixer.View.Pages
                 User[] clients = db.Users.Include(o => o.IdSettingNavigation.IdStatusNavigation).ToArray();
                 users_dg.ItemsSource = clients;
             }
+            alluses_tblock.Text = $"Всего - {users_dg.Items.Count}";
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -56,6 +58,33 @@ namespace TimeFixer.View.Pages
                 EF.Functions.Like(o.Login, $"%{search_tb.Text}%")).ToArray();
                 users_dg.ItemsSource = clients;
             }
+        }
+
+        private void edit_button_Click(object sender, RoutedEventArgs e)
+        {
+            User user = users_dg.SelectedItem as User;
+            using (TimeFixerContext db = new TimeFixerContext())
+                user = db.Users.Where(o => o.Ld == user.Ld).Include(o => o.IdSettingNavigation.IdStatusNavigation).First();
+
+            MinWin win = new MinWin(new UserEdit_page(user));
+            win.ShowDialog();
+            LoadDateGrid();
+        }
+
+        private void delete_button_Click(object sender, RoutedEventArgs e)
+        {
+            User user = users_dg.SelectedItem as User;
+            if (MyMessageBox.Show("Внимание", "Вы точно хотите удалить этого пользователя?", MyMessageBoxOptions.YesNo) == false)
+                return;
+
+            using (TimeFixerContext db = new TimeFixerContext())
+            {
+                db.Users.Remove(user);
+                db.SaveChanges();
+            }
+            MyMessageBox.Show("Внимание", "Пользователь успешно удален!");
+
+            LoadDateGrid();
         }
     }
 }
