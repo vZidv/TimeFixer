@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using TimeFixer.Classes;
 //using TimeFixer.Database;
 using Wpf.Ui.Controls;
+using System.IO;
 
 namespace TimeFixer.View.Windows
 {
@@ -27,7 +28,10 @@ namespace TimeFixer.View.Windows
     {
         public Authorization_win()
         {
-            InitializeComponent();               
+            InitializeComponent();
+
+
+
         }
 
         private void enter_but_Click(object sender, RoutedEventArgs e)
@@ -64,8 +68,25 @@ namespace TimeFixer.View.Windows
             }
             catch (Exception ex)
             {
-                MyMessageBox.Show("Ошибка", ex.Message);
+                //  MyMessageBox.Show("Ошибка", ex.Message);
+                System.Windows.MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            // AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
+
+            //using (TimeFixerContext db = new TimeFixerContext())
+            //{
+
+            //    if (db.Database.CanConnect())
+            //        return;
+            //    db.Database.EnsureCreated();
+
+
+            //}
         }
     }
 }

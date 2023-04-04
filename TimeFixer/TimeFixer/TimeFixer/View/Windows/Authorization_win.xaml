@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TimeFixer.View.Windows"
         mc:Ignorable="d"
         xmlns:ui ="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="Авторизация" Height="550" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Source/Logo.png">
+        Title="Авторизация" Height="550" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" Icon="/Source/Logo.png" Loaded="Window_Loaded">
     <Grid>
 
         <Border  Height="550" Width="800" 
